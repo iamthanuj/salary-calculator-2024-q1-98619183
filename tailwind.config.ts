@@ -9,7 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily:{
-        interface:['Inter', 'sans-serif']
+        inter:['Inter', 'sans-serif']
+      },
+      colors:{
+        "bg-main":"#FAFAFA",
+        "bg-secondary" : "#E0E0E0",
+        "text-secondary":"#757575",
+        "secondary-color":"#0052EA",
       },
     },
   },
