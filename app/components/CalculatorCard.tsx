@@ -3,7 +3,11 @@ import React from "react";
 import Image from "next/image";
 
 function CalculatorCard() {
-  return (
+
+
+    
+
+    return (
     <div className="font-inter bg-bg-main w-[680px] p-6 border border-bg-secondary rounded-lg">
       <div className="flex justify-between items-center ">
         <h3 className="text-xl font-bold">Calculate Your Salary</h3>
@@ -41,13 +45,13 @@ function CalculatorCard() {
           <input
             className="bg-white w-[212px]  py-3 px-[15px] rounded outline-none border border-bg-secondary"
             type="text"
-            placeholder="150,000.00"
+            placeholder="Pay Details (Title)"
           />
 
           <input
             className="bg-white w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
             type="text"
-            placeholder="150,000.00"
+            placeholder="Amount"
           />
 
           <div className="flex items-center gap-4">
@@ -113,9 +117,9 @@ function CalculatorCard() {
 
       {/* deductions */}
       <div className="mt-6">
-        <p className="font-semibold">Earnings</p>
+        <p className="font-semibold">Deductions</p>
         <p className="text-[12px] text-text-secondary mt-1">
-          Allowance, Fixed Allowance, Bonus and etc.
+          Salary Advances, Loan Deductions and all.
         </p>
 
         <div className="flex items-center gap-2 mt-2">
