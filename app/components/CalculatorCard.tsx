@@ -36,7 +36,7 @@ function CalculatorCard() {
         <h3 className="text-[16px] md:text-xl font-bold">Calculate Your Salary</h3>
         <button className="flex items-center gap-1" onClick={resetForm}>
           <Image
-            src="/images/icon-color.svg"
+            src="/images/reset-icon.svg"
             alt="reset-icon"
             width={21}
             height={18}
