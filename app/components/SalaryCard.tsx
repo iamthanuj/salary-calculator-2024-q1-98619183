@@ -58,9 +58,9 @@ const SalaryCard = () => {
     return afterGrossDeduction * 0.03;
   };
 
-  const calculateApit = ():Number => {
+  const calculateApit = ():number => {
     const grossEarnings = calculateGrossEarnings();
-    let apit: Number;
+    let apit: number;
 
     switch (true) {
       case grossEarnings <= 100000:
