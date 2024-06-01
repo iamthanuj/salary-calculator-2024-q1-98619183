@@ -1,6 +1,106 @@
+"use client";
 import React from "react";
+import { useSalaryContext } from "../context/SalaryContext";
 
 const SalaryCard = () => {
+  const { basicSalary, earnings, deductions } = useSalaryContext();
+
+  const totalEarnings = () => {
+    return earnings.reduce(
+      (total, earning) => total + earning.amount,
+      basicSalary
+    );
+  };
+
+  const calculateGrossEarnings = () => {
+    return totalEarnings() - calculateGrossDeductions();
+  };
+
+  const calculateGrossDeductions = () => {
+    return deductions.reduce((total, deduction) => total + deduction.amount, 0);
+  };
+
+  const calculateEmployeeEpf = () => {
+    const applicableEarnings = earnings.filter(
+      (earning) => earning.isEpfEtfEnable
+    );
+    console.log(applicableEarnings);
+    const afterGrossDeduction =
+      applicableEarnings.reduce(
+        (total, earning) => total + earning.amount,
+        basicSalary
+      ) - calculateGrossDeductions();
+    console.log(afterGrossDeduction);
+    return afterGrossDeduction * 0.08;
+  };
+
+  const calculateEmployerEpf = () => {
+    const applicableEarnings = earnings.filter(
+      (earning) => earning.isEpfEtfEnable
+    );
+    const afterGrossDeduction =
+      applicableEarnings.reduce(
+        (total, earning) => total + earning.amount,
+        basicSalary
+      ) - calculateGrossDeductions();
+    return afterGrossDeduction * 0.12;
+  };
+
+  const calculateEmployerEtf = () => {
+    const applicableEarnings = earnings.filter(
+      (earning) => earning.isEpfEtfEnable
+    );
+    const afterGrossDeduction =
+      applicableEarnings.reduce(
+        (total, earning) => total + earning.amount,
+        basicSalary
+      ) - calculateGrossDeductions();
+    return afterGrossDeduction * 0.03;
+  };
+
+  const calculateApit = ():Number => {
+    const grossEarnings = calculateGrossEarnings();
+    let apit: Number;
+
+    switch (true) {
+      case grossEarnings <= 100000:
+        apit = 0;
+        break;
+      case grossEarnings <= 141667:
+        apit = 0.06 * grossEarnings - 6000;
+        break;
+      case grossEarnings <= 183333:
+        apit = 0.12 * grossEarnings - 14500;
+        break;
+      case grossEarnings <= 225000:
+        apit = 0.18 * grossEarnings - 25500;
+        break;
+      case grossEarnings <= 266667:
+        apit = 0.24 * grossEarnings - 39000;
+        break;
+      case grossEarnings <= 308333:
+        apit = 0.3 * grossEarnings - 55000;
+        break;
+      case grossEarnings > 308333:
+        apit = 0.36 * grossEarnings - 73500;
+        break;
+      default:
+        apit = 0;
+        break;
+    }
+
+    return apit;
+  };
+
+  const grossEarnings = calculateGrossEarnings();
+  const grossDeductions = calculateGrossDeductions();
+  const employeeEpf = calculateEmployeeEpf();
+  const employerEpf = calculateEmployerEpf();
+  const employerEtf = calculateEmployerEtf();
+  const netSalary = calculateGrossEarnings() - calculateEmployeeEpf();
+  const apit = calculateApit();
+  const ctc = basicSalary + grossEarnings + employerEpf + employerEtf;
+
   return (
     <div className="font-inter bg-bg-main p-6 border border-bg-secondary rounded-lg w-[480px]">
       <h3 className="text-xl font-bold">Calculate Your Salary</h3>
@@ -17,27 +117,27 @@ const SalaryCard = () => {
         <div className="mt-4 flex flex-col gap-2">
           <div className="flex justify-between ">
             <p>Basic Salary</p>
-            <p>150,000.00</p>
+            <p>{basicSalary.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between ">
             <p>Gross Earning</p>
-            <p>160,000.00</p>
+            <p>{grossEarnings.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between ">
             <p>Gross Deduction</p>
-            <p>- 8,000.00</p>
+            <p>- {grossDeductions.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between ">
             <p>Employee EPF (8%)</p>
-            <p>- 12,160.00</p>
+            <p>{employeeEpf.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between ">
             <p>APIT</p>
-            <p>- 3,740.00</p>
+            <p>{apit}</p>
           </div>
         </div>
 
@@ -45,7 +145,7 @@ const SalaryCard = () => {
         <div>
           <div className="flex justify-between border border-bg-secondary rounded-[4px] p-4 mt-6">
             <p className="font-semibold">Net Salary (Take Home)</p>
-            <p className="font-semibold">136,100.00</p>
+            <p className="font-semibold">{netSalary.toFixed(2)}</p>
           </div>
         </div>
 
@@ -56,17 +156,17 @@ const SalaryCard = () => {
           </p>
           <div className="flex justify-between mt-3 ">
             <p>Employeer EPF (12%)</p>
-            <p>18,240.00</p>
+            <p>{employerEpf.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between mt-2">
             <p>Employeer ETF (3%)</p>
-            <p>4,560.00</p>
+            <p>{employerEtf.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between mt-8">
             <p>CTC (Cost to Company)</p>
-            <p>174,800.00</p>
+            <p>{ctc.toFixed(2)}</p>
           </div>
         </div>
       </div>

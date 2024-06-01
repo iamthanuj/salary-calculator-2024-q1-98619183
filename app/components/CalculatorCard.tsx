@@ -118,64 +118,6 @@ function CalculatorCard() {
           </div>
         ))}
 
-        {/* <div className="flex items-center gap-2 mt-2">
-          <input
-            className="bg-white w-[212px]  py-3 px-[15px] rounded outline-none border border-bg-secondary"
-            type="text"
-            placeholder="Pay Details (Title)"
-          />
-
-          <input
-            className="bg-white w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
-            type="text"
-            placeholder="Amount"
-          />
-
-          <div className="flex items-center gap-4">
-            <button className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full">
-              <Image
-                src="/images/x-icon.svg"
-                alt="reset-icon"
-                width={12}
-                height={12}
-              />
-            </button>
-            <div className=" flex items-center gap-2">
-              <input className="h-[18px] w-[18px]" type="checkbox" />
-              <p className="font-normal">EPF/ETF</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 mt-2">
-          <input
-            className="bg-white w-[212px]  py-3 px-[15px] rounded outline-none border border-bg-secondary"
-            type="text"
-            placeholder="Pay Details (Title)"
-          />
-
-          <input
-            className="bg-white w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
-            type="text"
-            placeholder="Amount"
-          />
-
-          <div className="flex items-center gap-4">
-            <button className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full">
-              <Image
-                src="/images/x-icon.svg"
-                alt="reset-icon"
-                width={12}
-                height={12}
-              />
-            </button>
-            <div className=" flex items-center gap-2">
-              <input className="h-[18px] w-[18px]" type="checkbox" />
-              <p className="font-normal">EPF/ETF</p>
-            </div>
-          </div>
-        </div> */}
-
         <button
           className="flex items-center gap-[9px] mt-[26px]"
           onClick={handleAddEarning}
@@ -190,18 +132,6 @@ function CalculatorCard() {
             Add New Allowance
           </p>
         </button>
-
-        {/* <button className="flex items-center gap-[9px] mt-[26px]">
-          <Image
-            src="/images/plus-icon.svg"
-            alt="reset-icon"
-            width={14}
-            height={14}
-          />
-          <p className="text-[14px] font-medium text-secondary-color">
-            Add New Allowance
-          </p>
-        </button> */}
       </div>
 
       {/* divide line */}
@@ -214,32 +144,48 @@ function CalculatorCard() {
           Salary Advances, Loan Deductions and all.
         </p>
 
-        <div className="flex items-center gap-2 mt-2">
-          <input
-            className="bg-white w-[212px]  py-3 px-[15px] rounded outline-none border border-bg-secondary"
-            type="text"
-            placeholder="150,000.00"
-          />
-
-          <input
-            className="bg-white w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
-            type="text"
-            placeholder="150,000.00"
-          />
-
-          <div className="flex items-center gap-4">
-            <button className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full">
-              <Image
-                src="/images/x-icon.svg"
-                alt="reset-icon"
-                width={12}
-                height={12}
-              />
-            </button>
+        {deductions.map((deduction) => (
+          <div className="flex items-center gap-2 mt-2" key={deduction.id}>
+            <input
+              className="bg-white w-[212px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
+              type="text"
+              placeholder="Pay Details (Title)"
+              value={deduction.title}
+              onChange={(e) =>
+                updateDeduction(deduction.id, { title: e.target.value })
+              }
+            />
+            <input
+              className="bg-white w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
+              type="text"
+              placeholder="Amount"
+              value={deduction.amount}
+              onChange={(e) =>
+                updateDeduction(deduction.id, {
+                  amount: Number(e.target.value),
+                })
+              }
+            />
+            <div className="flex items-center gap-4">
+              <button
+                className="p-[6px] bg-bg-secondary h-8 w-8 flex justify-center items-center rounded-full"
+                onClick={() => deleteDeduction(deduction.id)}
+              >
+                <Image
+                  src="/images/x-icon.svg"
+                  alt="reset-icon"
+                  width={12}
+                  height={12}
+                />
+              </button>
+            </div>
           </div>
-        </div>
+        ))}
 
-        <button className="flex items-center gap-[9px] mt-[26px]">
+        <button
+          className="flex items-center gap-[9px] mt-[26px]"
+          onClick={handleAddDeduction}
+        >
           <Image
             src="/images/plus-icon.svg"
             alt="reset-icon"
