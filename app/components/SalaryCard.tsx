@@ -100,8 +100,8 @@ const SalaryCard = () => {
   const ctc = grossEarnings + employerEpf + employerEtf
 
   return (
-    <div className="font-inter bg-bg-main p-6 border border-bg-secondary rounded-lg   lg:w-[480px]">
-      <h3 className="text-xl font-bold">Calculate Your Salary</h3>
+    <div className="font-inter bg-bg-main p-6 border border-bg-secondary rounded-lg  w-[320px]  md:w-[480px]">
+      <h3 className="text-xl font-bold">Your Salary</h3>
       <div className="mt-6">
         {/* Head title */}
         <div className="flex justify-between">

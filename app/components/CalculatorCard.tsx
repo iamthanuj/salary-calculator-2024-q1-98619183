@@ -31,7 +31,7 @@ function CalculatorCard() {
   };
 
   return (
-    <div className="font-inter bg-bg-main lg:w-[680px] p-6 border border-bg-secondary rounded-lg">
+    <div className="font-inter bg-bg-main  lg:w-[680px] p-6 border border-bg-secondary rounded-lg">
       <div className="flex justify-between items-center ">
         <h3 className="text-[16px] md:text-xl font-bold">Calculate Your Salary</h3>
         <button className="flex items-center gap-1" onClick={resetForm}>
