@@ -4,8 +4,8 @@ import SalaryCard from "./SalaryCard";
 
 function Dashboard() {
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div className="flex justify-between gap-6">
+    <div className="xl:h-screen flex justify-center mt-[80px] mb-[80px] xl:my-0 xl:items-center">
+      <div className="flex flex-col  xl:flex-row xl:justify-between gap-6">
         <CalculatorCard />
         <SalaryCard />
       </div>

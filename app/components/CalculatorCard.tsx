@@ -19,9 +19,6 @@ function CalculatorCard() {
   } = useSalaryContext();
 
   const handleBasicSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setBasicSalary(Number(e.target.value));
-    console.log(typeof e.target.value);
-    console.log(typeof Number(e.target.value));
     setBasicSalary(Number(e.target.value));
   };
 
@@ -29,15 +26,15 @@ function CalculatorCard() {
     addEarning({ title: "", amount: 0, isEpfEtfEnable: false });
   };
 
-  const handleAddDeduction = () => {
+  const handleAddDeduction = () => {  
     addDeduction({ title: "", amount: 0 });
   };
 
   return (
-    <div className="font-inter bg-bg-main w-[680px] p-6 border border-bg-secondary rounded-lg">
+    <div className="font-inter bg-bg-main lg:w-[680px] p-6 border border-bg-secondary rounded-lg">
       <div className="flex justify-between items-center ">
-        <h3 className="text-xl font-bold">Calculate Your Salary</h3>
-        <button className="flex gap-1" onClick={resetForm}>
+        <h3 className="text-[16px] md:text-xl font-bold">Calculate Your Salary</h3>
+        <button className="flex items-center gap-1" onClick={resetForm}>
           <Image
             src="/images/icon-color.svg"
             alt="reset-icon"
@@ -54,7 +51,7 @@ function CalculatorCard() {
       <div className="mt-6">
         <p className="font-semibold">Basic Salary</p>
         <input
-          className="bg-white w-[356px] py-3 px-[15px] mt-2 rounded outline-none border border-bg-secondary"
+          className="bg-white w-full md:w-[356px] py-3 px-[15px] mt-2 rounded outline-none border border-bg-secondary"
           type="text"
           placeholder="150,000.00"
           value={basicSalary}
@@ -70,9 +67,12 @@ function CalculatorCard() {
         </p>
 
         {earnings.map((earning) => (
-          <div className="flex items-center gap-2 mt-2" key={earning.id}>
+          <div
+            className="flex items-center gap-2 flex-col md:flex-row mt-2"
+            key={earning.id}
+          >
             <input
-              className="bg-white w-[212px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
+              className="bg-white w-full md:w-[212px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
               type="text"
               placeholder="Pay Details (Title)"
               value={earning.title}
@@ -81,7 +81,7 @@ function CalculatorCard() {
               }
             />
             <input
-              className="bg-white w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
+              className="bg-white w-full md:w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
               type="text"
               placeholder="Amount"
               value={earning.amount}
@@ -145,9 +145,12 @@ function CalculatorCard() {
         </p>
 
         {deductions.map((deduction) => (
-          <div className="flex items-center gap-2 mt-2" key={deduction.id}>
+          <div
+            className="flex items-center gap-2  flex-col md:flex-row  mt-2"
+            key={deduction.id}
+          >
             <input
-              className="bg-white w-[212px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
+              className="bg-white w-full md:w-[212px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
               type="text"
               placeholder="Pay Details (Title)"
               value={deduction.title}
@@ -156,7 +159,7 @@ function CalculatorCard() {
               }
             />
             <input
-              className="bg-white w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
+              className="bg-white w-full md:w-[136px] py-3 px-[15px] rounded outline-none border border-bg-secondary"
               type="text"
               placeholder="Amount"
               value={deduction.amount}

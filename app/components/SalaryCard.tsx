@@ -24,13 +24,11 @@ const SalaryCard = () => {
     const applicableEarnings = earnings.filter(
       (earning) => earning.isEpfEtfEnable
     );
-    console.log(applicableEarnings);
     const afterGrossDeduction =
       applicableEarnings.reduce(
         (total, earning) => total + earning.amount,
         basicSalary
       ) - calculateGrossDeductions();
-    console.log(afterGrossDeduction);
     return afterGrossDeduction * 0.08;
   };
 
@@ -97,12 +95,12 @@ const SalaryCard = () => {
   const employeeEpf = calculateEmployeeEpf();
   const employerEpf = calculateEmployerEpf();
   const employerEtf = calculateEmployerEtf();
-  const netSalary = calculateGrossEarnings() - calculateEmployeeEpf();
   const apit = calculateApit();
-  const ctc = basicSalary + grossEarnings + employerEpf + employerEtf;
+  const netSalary = calculateGrossEarnings() - calculateEmployeeEpf() - apit ;
+  const ctc = grossEarnings + employerEpf + employerEtf
 
   return (
-    <div className="font-inter bg-bg-main p-6 border border-bg-secondary rounded-lg w-[480px]">
+    <div className="font-inter bg-bg-main p-6 border border-bg-secondary rounded-lg   lg:w-[480px]">
       <h3 className="text-xl font-bold">Calculate Your Salary</h3>
       <div className="mt-6">
         {/* Head title */}
@@ -132,20 +130,20 @@ const SalaryCard = () => {
 
           <div className="flex justify-between ">
             <p>Employee EPF (8%)</p>
-            <p>{employeeEpf.toFixed(2)}</p>
+            <p>- {employeeEpf.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between ">
             <p>APIT</p>
-            <p>{apit}</p>
+            <p>- {apit.toFixed(2)}</p>
           </div>
         </div>
 
         {/* net salary */}
         <div>
-          <div className="flex justify-between border border-bg-secondary rounded-[4px] p-4 mt-6">
+          <div className="flex flex-col md:flex-row justify-between border border-bg-secondary rounded-[4px] p-4 mt-6">
             <p className="font-semibold">Net Salary (Take Home)</p>
-            <p className="font-semibold">{netSalary.toFixed(2)}</p>
+            <p className="font-semibold">{netSalary.toLocaleString()}</p>
           </div>
         </div>
 
